@@ -2,9 +2,11 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongodb = require("./mongodb/mongodb.connect");
+const mongodb = require("./src/mongodb/mongodb.connect");
 
 require('dotenv').config();
+
+const alertsRouter = require('./src/alerts/alerts.routes')
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.use(bodyParser.json({ limit: '50mb' })); // TODO look up the limit arg
   mongodb.connect();
 
 // apply routes
+app.use('/alerts', alertsRouter)
+
 app.get('/ping', (req, res) => {
   res.json({message: 'pong'})
 })

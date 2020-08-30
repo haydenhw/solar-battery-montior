@@ -39,6 +39,13 @@ exports.sendNotFoundResponse = (res, message) => {
   });
 };
 
+exports.sendBadRequestResponse = (res, message) => {
+  res.status(HTTP_CODES.BAD_REQUEST).json({
+    message
+  });
+};
+
+
 exports.sendNoContentResponse = res => {
   res.status(HTTP_CODES.NO_CONTENT).json();
 };

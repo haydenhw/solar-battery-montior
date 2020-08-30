@@ -1,0 +1,9 @@
+{
+  "name": "New alert",
+  "threshold": 12.4,
+  "triggersBelowThreshold": true,
+  "sensitivityDuration": 300,
+  "usesEmailNotification": false,
+  "usesSMSNotification": true,
+  "usesDesktopNotification": false
+}

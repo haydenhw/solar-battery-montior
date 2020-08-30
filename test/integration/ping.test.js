@@ -1,6 +1,6 @@
 const request = require('supertest')
 const app = require('../../app')
-const mockMongoDb = require("../../mongodb/mongodb.mock.connect")
+const mockMongoDb = require("../../src/mongodb/mongodb.mock.connect")
 
 describe('ping endpoint', () => {
   beforeAll(async () => {
