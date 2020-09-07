@@ -34,7 +34,7 @@ const alertThree = {
   usesSMSNotification: true,
 }
 
-const ommittedAlert = {
+const omittedAlert = {
   _id: new mongoose.Types.ObjectId(),
   name: "Ommitted alert",
   sensitivityDuration: 1000,
@@ -56,6 +56,6 @@ module.exports = {
   alertOne,
   alertTwo,
   alertThree,
-  ommittedAlert,
+  omittedAlert,
   seedDatabase
 }

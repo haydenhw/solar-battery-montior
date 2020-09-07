@@ -6,7 +6,7 @@ const {
     alertOne,
     alertTwo,
     alertThree,
-    ommittedAlert,
+    omittedAlert,
     seedDatabase,
 } = require('../fixtures/db')
 
@@ -55,10 +55,20 @@ describe(endpointUrl, () => {
 
   test('Should return 404 response if alert does not exist', async () => {
     const updates = { name: 'updated name', threshold: 12.89999 }
-    const response = await request(app).patch(`${endpointUrl}/${ommittedAlert._id}`).send(updates)
+    const response = await request(app).patch(`${endpointUrl}/${omittedAlert._id}`).send(updates)
     expect(response.statusCode).toBe(404)
   })
+
+  test('Should delete alert by id', async () => {
+    const response = await request(app)
+      .delete(`${endpointUrl}/${alertOne._id}`)
+      .send()
+
+    expect(response.statusCode).toBe(200)
+    expect(response.body.payload.name).toStrictEqual(alertOne.name)
+  })
 })
+
 
 
 

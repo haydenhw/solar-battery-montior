@@ -51,6 +51,16 @@ exports.updateAlert = async (req, res) => {
   }
 }
 
+exports.deleteAlert = async (req, res) => {
+  // TODO handle 404 case
+  try {
+    const alert = await AlertsModel.findOneAndDelete({ _id: req.params.id })
+    sendOkResponse(res, alert)
+  } catch (e) {
+    console.log(e)
+    sendServerError(res, e)
+  }
+}
 
 
 

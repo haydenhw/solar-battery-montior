@@ -5,6 +5,7 @@ class VoltageAlertManager {
 
   addAlert(alert) {
     this.alerts.push(alert)
+    // sort alerts by threshold
   }
 
   getAlerts() {
@@ -12,6 +13,7 @@ class VoltageAlertManager {
   }
 
   triggerAlertsWithThresholdsBelowVoltage(voltage) {
+    // TODO write a comment about how this method works in terms of alert priority
     for (const alert of this.alerts) {
       if (alert.triggersAtVoltage(voltage)) {
         alert.trigger()
@@ -48,7 +50,6 @@ class VoltageAlert {
     );
   }
 
-
   // TODO delete this method if not needed ?
   triggerIfNewVoltageExceedsThreshold(voltage) {
     if (this.triggersAtVoltage(voltage)) {
@@ -61,7 +62,10 @@ class VoltageAlert {
   }
 }
 
+const voltageAlertManager = new VoltageAlertManager()
+Object.freeze(voltageAlertManager)
+
 module.exports = {
-  VoltageAlertManager,
+  voltageAlertManager,
   VoltageAlert
 }
