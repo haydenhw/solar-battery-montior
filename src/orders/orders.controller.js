@@ -20,7 +20,7 @@ exports.createOrder = async (req, res) => {
     let order = await newOrder.save();
     order = await order.populate('products').execPopulate();
 
-    require('../../app').io.emit('order-created', order);
+    require('../app').io.emit('order-created', order);
     sendCreatedResponse(res, order);
   } catch (e) {
     sendServerError(res, e);

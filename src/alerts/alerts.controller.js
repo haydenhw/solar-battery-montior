@@ -1,6 +1,6 @@
 const AlertsModel = require('./alerts.model')
-const { sendServerError } = require('../core/responses');
 const {
+  sendServerError,
   sendCreatedResponse,
   sendBadRequestResponse,
   sendNotFoundResponse,
