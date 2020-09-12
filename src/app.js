@@ -6,7 +6,6 @@ const mongodb = require("./mongodb/mongodb.connect");
 
 require('dotenv').config();
 
-
 const app = express();
 
 // apply general middlewares
@@ -19,10 +18,10 @@ app.use(bodyParser.json({ limit: '50mb' })); // TODO look up the limit arg
 
 // apply routes
 const alertsRouter = require('./alerts/alerts.routes')
-const sensorRouter = require('./sensors/sensors.routes')
+const sensorRouter = require('./messages/messages.routes')
 
 app.use('/alerts', alertsRouter)
-app.use('/sensors', sensorRouter)
+app.use('/messages', sensorRouter)
 
 app.get('/ping', (req, res) => {
   res.json({message: 'pong'})
