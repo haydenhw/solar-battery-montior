@@ -10,9 +10,9 @@ const {
     seedDatabase,
 } = require('../fixtures/db')
 
-const endpointUrl = '/alerts'
+const ENDPOINT_URL = '/alerts'
 
-describe(endpointUrl, () => {
+describe(ENDPOINT_URL, () => {
   beforeAll(async () => {
     await mockMongoDb.connect()
   });
@@ -24,7 +24,7 @@ describe(endpointUrl, () => {
   beforeEach(seedDatabase)
 
   test('Should return a list of alerts', async () => {
-    const response = await request(app).get(endpointUrl)
+    const response = await request(app).get(ENDPOINT_URL)
     expect(response.statusCode).toBe(200)
     expect(response.body.payload).toHaveLength(3)
     expect(response.body.payload[0].name).toEqual(alertOne.name)
@@ -33,7 +33,7 @@ describe(endpointUrl, () => {
   })
 
   test('Should create new alert', async () => {
-    const response = await request(app).post(endpointUrl).send(newAlert)
+    const response = await request(app).post(ENDPOINT_URL).send(newAlert)
     expect(response.statusCode).toBe(201)
     expect(response.body.payload.name).toEqual(newAlert.name)
     expect(response.body.payload.threshold).toEqual(newAlert.threshold)
@@ -41,7 +41,7 @@ describe(endpointUrl, () => {
 
   test('Should update alert by id', async () => {
     const updates = { name: 'updated name', threshold: 12.89999 }
-    const response = await request(app).patch(`${endpointUrl}/${alertOne._id}`).send(updates)
+    const response = await request(app).patch(`${ENDPOINT_URL}/${alertOne._id}`).send(updates)
     expect(response.statusCode).toBe(200)
     expect(response.body.payload.name).toEqual(updates.name)
     expect(response.body.payload.threshold).toEqual(updates.threshold)
@@ -49,19 +49,19 @@ describe(endpointUrl, () => {
 
   test('Should return 400 response if invalid update is supplied', async () => {
     const updates = { name: 'updated name', threshold: 12.89999, invalidUpdate: true }
-    const response = await request(app).patch(`${endpointUrl}/${alertOne._id}`).send(updates)
+    const response = await request(app).patch(`${ENDPOINT_URL}/${alertOne._id}`).send(updates)
     expect(response.statusCode).toBe(400)
   })
 
   test('Should return 404 response if alert does not exist', async () => {
     const updates = { name: 'updated name', threshold: 12.89999 }
-    const response = await request(app).patch(`${endpointUrl}/${omittedAlert._id}`).send(updates)
+    const response = await request(app).patch(`${ENDPOINT_URL}/${omittedAlert._id}`).send(updates)
     expect(response.statusCode).toBe(404)
   })
 
   test('Should delete alert by id', async () => {
     const response = await request(app)
-      .delete(`${endpointUrl}/${alertOne._id}`)
+      .delete(`${ENDPOINT_URL}/${alertOne._id}`)
       .send()
 
     expect(response.statusCode).toBe(200)

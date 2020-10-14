@@ -60,7 +60,7 @@ exports.getPendingOrders = async (req, res) => {
   }
 };
 
-exports.getHistoryOrders = async (req, res) => {
+exports.getLatestOrders = async (req, res) => {
   try {
     const pendingOrders = await Order.find().populate('products establishmentId');
     sendOkResponse(res, pendingOrders);

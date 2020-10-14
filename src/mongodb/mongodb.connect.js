@@ -12,7 +12,7 @@ async function connect() {
       }
     );
   } catch (err) {
-    console.error("Error connecting to mongodb")
+    console.error("Error connecting to mongodb: ")
     console.error(err);
   }
 }

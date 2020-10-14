@@ -7,4 +7,4 @@ RUN yarn
 # RUN npm ci --only=production
 COPY . .
 EXPOSE 3003
-CMD [ "yarn", "start" ]
+CMD [ "node", "server.js" ]

@@ -19,9 +19,11 @@ app.use(bodyParser.json({ limit: '50mb' })); // TODO look up the limit arg
 // apply routes
 const alertsRouter = require('./alerts/alerts.routes')
 const sensorRouter = require('./messages/messages.routes')
+const historyRouter = require('./history/history.routes')
 
 app.use('/alerts', alertsRouter)
 app.use('/messages', sensorRouter)
+app.use('/history', historyRouter)
 
 app.get('/ping', (req, res) => {
   res.json({message: 'pong'})
@@ -41,5 +43,16 @@ app.use((error, req, res, next) => {
     }
   });
 });
+
+// TODO swap out the error handling middleware above for this more secure approach
+// app.use((error, req, res, next) => {
+//   let response
+//   if (process.env.NODE_ENV === 'production') {
+//     response = { error: { message: 'server error' }}
+//   } else {
+//     response = { error }
+//   }
+//   res.status(500).json(response)
+// })
 
 module.exports = app
